@@ -1,5 +1,5 @@
 import streamlit as st
-import mapping_logic  # Importiert deine Logik aus der anderen Datei
+import swisspor_mapping  # Importiert deine Logik aus der anderen Datei
 import pandas as pd
 
 st.title("POC: Swisspor IFC-Mapping & Kosten")
@@ -14,7 +14,7 @@ if ifc_file and csv_file:
     st.header("2. Mapping & Analyse")
     with st.spinner("Berechne Mapping und Kosten..."):
         # Hier wird die Funktion aus deinem anderen Skript aufgerufen
-        results = mapping_logic.process_mapping(ifc_file, csv_file)
+        results = swisspor_mapping.process_mapping(ifc_file, csv_file)
     
     # 3. OUTPUT (Anzeige der Ergebnisse)
     st.success("Mapping abgeschlossen!")
