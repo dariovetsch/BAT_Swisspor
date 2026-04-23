@@ -1,0 +1,43 @@
+Swisspor IFC Mapping Report v5.0
+Datum:  2026-04-23 12:02:48
+IFC:    /Users/dariovetsch/Documents/22-001 Studium/HS25/Bachelorthesis/Arbeitsordner/Mapping/Mapping mit Skript/Modell_Architektur.ifc
+Output: /Users/dariovetsch/Documents/22-001 Studium/HS25/Bachelorthesis/Arbeitsordner/Mapping/Mapping mit Skript/Modell_Architektur_enriched.ifc
+============================================================
+
+A) MODELLIERTE SCHICHTEN
+----------------------------------------
+OK | 03 | 16_Belag | Begehbar geschlossener Belag | 14 Props
+OK | 04 | 01_Unterkonstruktion | Holzwerkstoffplatte im Gefälle 1.5% | 19 Props
+OK | 03 | 05_Gefälledämmung | LAMBDA Roof Gefälleplatten MD 50 mm | 21 Props
+OK | 02 | 01_Unterkonstruktion | Stahlbeton ohne Gefälle 200 mm | 21 Props
+OK | 01 | 04_Wärmedämmung | PIR Alu 100 mm | 20 Props
+OK | 04 | 16_Belag | Begehbar offener Belag | 14 Props
+OK | 02 | 04_Wärmedämmung | PIR Alu 120 mm | 20 Props
+OK | 02 | 05_Gefälledämmung | LAMBDA Roof Gefälleplatten MD 50 mm | 21 Props
+KEIN CSV | 04 | 00_Gesamtdachaufbau | D B 25cm aussen
+OK | 02 | 12_Schutzschicht | Rundkies 50 mm gewaschen | 16 Props
+OK | 03 | 13_Splitschicht | Splittbett | 16 Props
+OK | 03 | 04_Wärmedämmung | PIR Alu 120 mm | 20 Props
+KEIN CSV | 02 | 00_Gesamtdachaufbau | D B 25cm aussen
+OK | 01 | 05_Gefälledämmung | LAMBDA Roof Gefälleplatten MD 50 mm | 21 Props
+OK | 01 | 15_Vegetationstragschicht | Extensivsubstrat verdichtet 120 mm | 17 Props
+OK | 01 | 04_Wärmedämmung | PIR Alu 100 mm | 20 Props
+KEIN CSV | 01 | 00_Gesamtdachaufbau | D B 25cm aussen
+OK | 03 | 01_Unterkonstruktion | Stahlbeton ohne Gefälle 200 mm | 21 Props
+KEIN CSV | 03 | 00_Gesamtdachaufbau | D B 25cm aussen
+OK | 01 | 01_Unterkonstruktion | Stahlbeton ohne Gefälle 200 mm | 21 Props
+
+B) GESAMTDACHBAUTEIL
+----------------------------------------
+
+============================================================
+ZUSAMMENFASSUNG
+  Elemente total:              77
+  Modellierte Schichten:       16
+  Kein CSV-Eintrag:            4
+  Gesamtdachbauteil:           0
+  Ohne Swisspor-Pset:          57
+
+NÄCHSTE SCHRITTE:
+  → swisspor_mengen.py  (Schritt 2)
+  → swisspor_kosten.py  (Schritt 3)
