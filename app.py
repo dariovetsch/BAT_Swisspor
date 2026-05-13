@@ -216,14 +216,14 @@ st.markdown("""
             <span style="background:#e63946"></span>
         </div>
     </div>
-    <span class="sw-nav-title">swissporBIM · IFC-Attribuierung &amp; Kostenermittlung</span>
-    <span class="sw-nav-right">DC_BAT_FS26 · v5.0</span>
+    <span class="sw-nav-title">swissporBIM - IFC-Attribuierung und Kostenermittlung</span>
+    <span class="sw-nav-right">DC_BAT_FS26 - v5.0</span>
 </nav>
 """, unsafe_allow_html=True)
 
 tab1, tab2 = st.tabs([
-    "UC-01  ·  IFC-Mapping",
-    "UC-02  ·  Mengen & Kosten"
+    "UC-01  -  IFC-Mapping",
+    "UC-02  -  Mengen und Kosten"
 ])
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -242,7 +242,7 @@ with tab1:
     ifc_file = st.file_uploader("IFC", type=["ifc"], label_visibility="collapsed", key="ifc_map")
     if ifc_file:
         size = len(ifc_file.getvalue()) / 1024 / 1024
-        st.markdown(f'<div class="sw-file-badge">↑ {ifc_file.name} · {size:.1f} MB</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="sw-file-badge"> {ifc_file.name} - {size:.1f} MB</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="sw-card">', unsafe_allow_html=True)
@@ -256,7 +256,7 @@ with tab1:
     csv_files = st.file_uploader("CSVs", type=["csv"], accept_multiple_files=True,
                                   label_visibility="collapsed", key="csv_map")
     if csv_files:
-        st.markdown("".join(f'<div class="sw-file-badge">↑ {f.name}</div>' for f in csv_files),
+        st.markdown("".join(f'<div class="sw-file-badge"> {f.name}</div>' for f in csv_files),
                     unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -271,7 +271,7 @@ with tab1:
         st.markdown('<p class="sw-upload-hint">Bitte IFC-Modell und CSV-Kataloge hochladen.</p>', unsafe_allow_html=True)
     col_btn, _ = st.columns([1, 3])
     with col_btn:
-        run_map = st.button("Mapping starten →", disabled=not (ifc_file and csv_files),
+        run_map = st.button("Mapping starten", disabled=not (ifc_file and csv_files),
                              use_container_width=True, key="btn_map")
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -302,17 +302,17 @@ with tab1:
         """, unsafe_allow_html=True)
 
         st.markdown('<div class="sw-card">', unsafe_allow_html=True)
-        st.markdown('<div class="sw-section-header"><div class="sw-section-num" style="background:#555">4</div><span class="sw-section-title">Protokoll &amp; Download</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="sw-section-header"><div class="sw-section-num" style="background:#555">4</div><span class="sw-section-title">Protokoll und Download</span></div>', unsafe_allow_html=True)
         st.markdown(f'<div class="sw-log">{results["log"]}</div>', unsafe_allow_html=True)
         st.markdown('<hr class="sw-divider">', unsafe_allow_html=True)
         out_name = ifc_file.name.replace(".ifc", "_enriched.ifc")
-        st.download_button(f"↓  {out_name} herunterladen", data=results["ifc_bytes"],
+        st.download_button(f"  {out_name} herunterladen", data=results["ifc_bytes"],
                            file_name=out_name, mime="application/octet-stream")
         st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# TAB 2 – MENGEN & KOSTEN
+# TAB 2 – MENGEN UND KOSTEN
 # ════════════════════════════════════════════════════════════════════════════
 with tab2:
 
@@ -328,7 +328,7 @@ with tab2:
                                      label_visibility="collapsed", key="ifc_kost")
     if ifc_enriched:
         size = len(ifc_enriched.getvalue()) / 1024 / 1024
-        st.markdown(f'<div class="sw-file-badge">↑ {ifc_enriched.name} · {size:.1f} MB</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="sw-file-badge"> {ifc_enriched.name} - {size:.1f} MB</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="sw-card">', unsafe_allow_html=True)
@@ -339,13 +339,13 @@ with tab2:
     </div>
     <p class="sw-upload-hint">
         Swisspor_Preisdatenbank_2026.xlsx – Sheets <code>Lookup_Kostenauswertung</code>
-        (Art.-Nr. + EP_Einbau) und <code>Lookup_Drittprodukte</code> (CostLabel → CHF).
+        (Art.-Nr. + EP_Einbau) und <code>Lookup_Drittprodukte</code> (CostLabel  CHF).
     </p>
     """, unsafe_allow_html=True)
     preisdb_file = st.file_uploader("Preisdatenbank", type=["xlsx"],
                                      label_visibility="collapsed", key="preisdb")
     if preisdb_file:
-        st.markdown(f'<div class="sw-file-badge">↑ {preisdb_file.name}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="sw-file-badge"> {preisdb_file.name}</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="sw-card">', unsafe_allow_html=True)
@@ -359,7 +359,7 @@ with tab2:
         st.markdown('<p class="sw-upload-hint">Bitte enriched IFC und Preisdatenbank hochladen.</p>', unsafe_allow_html=True)
     col_btn2, _ = st.columns([1, 3])
     with col_btn2:
-        run_kost = st.button("Kosten berechnen →", disabled=not (ifc_enriched and preisdb_file),
+        run_kost = st.button("Kosten berechnen", disabled=not (ifc_enriched and preisdb_file),
                               use_container_width=True, key="btn_kost")
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -404,12 +404,12 @@ with tab2:
             systems = sorted(df_k["system_id"].unique())
 
             # ──────────────────────────────────────────────────────────────
-            # A · MENGENAUSWERTUNG
+            # A - MENGENAUSWERTUNG
             # ──────────────────────────────────────────────────────────────
             st.markdown("""
             <div class="sw-section-bar">
               <div class="sw-section-bar-line" style="background:#1a3a5c;"></div>
-              <span class="sw-section-bar-title">A · Mengenauswertung nach Systemaufbau</span>
+              <span class="sw-section-bar-title">A - Mengenauswertung nach Systemaufbau</span>
             </div>
             <p class="sw-section-bar-sub">Schichten je System mit Fläche, Bestellmengen und Einheitspreis.</p>
             """, unsafe_allow_html=True)
@@ -497,8 +497,8 @@ with tab2:
                         </div>
                       </div>
                       <div style="text-align:right;">
-                        <div style="font-size:0.9rem;font-weight:700;color:#1a3a5c;">{row['flaeche_m2']:,.2f}</div>
-                        <div style="font-size:0.6rem;color:#9ca3af;text-transform:uppercase;">m²</div>
+                        <div style="font-size:0.9rem;font-weight:700;color:#1a3a5c;">{"—" if (row['flaeche_m2'] or 0) == 0.0 else f"{row['flaeche_m2']:,.2f}"}</div>
+                        <div style="font-size:0.6rem;color:#9ca3af;text-transform:uppercase;">{"lfm" if (row['flaeche_m2'] or 0) == 0.0 else "m²"}</div>
                       </div>
                       <div style="font-size:0.76rem;color:#4b5563;line-height:1.4;">{row['bestell_detail'] or '—'}</div>
                       <div style="text-align:right;">
@@ -512,12 +512,12 @@ with tab2:
                 st.markdown("</div>", unsafe_allow_html=True)
 
             # ──────────────────────────────────────────────────────────────
-            # B · KOSTENAUSWERTUNG
+            # B - KOSTENAUSWERTUNG
             # ──────────────────────────────────────────────────────────────
             st.markdown("""
             <div class="sw-section-bar" style="margin-top:3rem;">
               <div class="sw-section-bar-line" style="background:#e63946;"></div>
-              <span class="sw-section-bar-title">B · Kostenauswertung nach System</span>
+              <span class="sw-section-bar-title">B - Kostenauswertung nach System</span>
             </div>
             <p class="sw-section-bar-sub">Material- und Einbaukosten je System sowie CHF/m² Vergleich.</p>
             """, unsafe_allow_html=True)
@@ -685,16 +685,20 @@ with tab2:
             # Detailtabelle
             st.markdown('<div class="sw-card">', unsafe_allow_html=True)
             st.markdown('<p class="sw-chart-title">Alle Positionen – Detailansicht</p>', unsafe_allow_html=True)
-            df_table = df_k[[
+            table_cols = [
                 "system_id", "func_label", "product_name", "article_nr",
-                "flaeche_m2", "bestell_detail",
+                "flaeche_m2", "laenge_m", "mengenbasis", "bestell_detail",
                 "ep_material", "ep_einbau",
                 "poskosten_mat", "poskosten_ein", "poskosten_total",
                 "is_drittprodukt"
-            ]].copy()
+            ]
+            for c in ["laenge_m", "mengenbasis"]:
+                if c not in df_k.columns:
+                    df_k[c] = None
+            df_table = df_k[table_cols].copy()
             df_table.columns = [
                 "System", "Funktion", "Produkt", "Art.-Nr.",
-                "Fläche m²", "Bestellmenge",
+                "Fläche m²", "Länge m", "Mengenbasis", "Bestellmenge",
                 "EP Mat.", "EP Ein.",
                 "Material CHF", "Einbau CHF", "Total CHF", "Drittprodukt"
             ]
@@ -707,6 +711,7 @@ with tab2:
                     "EP Mat.":      st.column_config.NumberColumn(format="CHF %.2f"),
                     "EP Ein.":      st.column_config.NumberColumn(format="CHF %.2f"),
                     "Fläche m²":    st.column_config.NumberColumn(format="%.2f m²"),
+                    "Länge m":      st.column_config.NumberColumn(format="%.2f m"),
                 }
             )
             st.markdown("""
@@ -715,14 +720,14 @@ with tab2:
             </div>""", unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
-        # Protokoll & Download
+        # Protokoll und Download
         st.markdown('<div class="sw-card">', unsafe_allow_html=True)
-        st.markdown('<div class="sw-section-header"><div class="sw-section-num" style="background:#555">4</div><span class="sw-section-title">Protokoll &amp; Download</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="sw-section-header"><div class="sw-section-num" style="background:#555">4</div><span class="sw-section-title">Protokoll und Download</span></div>', unsafe_allow_html=True)
         st.markdown(f'<div class="sw-log">{results_k["log"]}</div>', unsafe_allow_html=True)
         st.markdown('<hr class="sw-divider">', unsafe_allow_html=True)
         if results_k["excel_bytes"]:
             st.download_button(
-                "↓  Kostenauswertung_Swisspor.xlsx herunterladen",
+                "  Kostenauswertung_Swisspor.xlsx herunterladen",
                 data=results_k["excel_bytes"],
                 file_name="Kostenauswertung_Swisspor.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -734,7 +739,7 @@ with tab2:
 # ─── FOOTER ───────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="sw-footer">
-    swisspor AG · Bahnhofstrasse 50 · CH-6312 Steinhausen
-    &nbsp;·&nbsp; swissporBIM v5.0 · DC_BAT_FS26 · HSLU
+    swisspor AG - Bahnhofstrasse 50 - CH-6312 Steinhausen
+     -  swissporBIM v5.0 - DC_BAT_FS26 - HSLU
 </div>
 """, unsafe_allow_html=True)
