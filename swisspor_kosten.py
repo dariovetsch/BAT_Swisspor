@@ -1,5 +1,5 @@
 """
-swisspor_kosten.py  –  BIM-ENGINE-SP  v4.0
+swisspor_kosten.py  –  BIM-ENGINE-SP  v4.1
 ============================================================
 UC-02: Mengenermittlung & Kostenauswertung aus enriched IFC
 
@@ -10,8 +10,8 @@ v4.0 Änderungen:
   - Einbaukosten (EP_Einbau) aus Preisdatenbank
   - Drittprodukte: CHF 0.00 Platzhalter aus Lookup_Drittprodukte
   - Produktname (IFC) als eigene Spalte
-  - BKP-Code als Strukturierungsebene
-  - 2-Sheet Excel: Kostenauswertung + BKP-Zusammenzug
+  - Schichtfunktion als Strukturierungsebene
+  - 2-Sheet Excel: Kostenauswertung + Zusammenzug Schichtfunktion
 ============================================================
 """
 import io, re, math
@@ -23,7 +23,7 @@ from openpyxl.utils import get_column_letter
 import ifcopenshell
 
 
-# ── Pset -> Funktionscode ──────────────────────────────────────────────────────
+# ── Pset → Funktionscode ──────────────────────────────────────────────────────
 PSET_TO_FUNC = {
     "Pset_Swisspor_Produkt":                "01_Unterkonstruktion",
     "Pset_Swisspor_Haftvermittler":         "02_Haftvermittler",
@@ -69,7 +69,7 @@ def _verschnitt(product_type: str) -> float:
 
 # ── Rollenlänge / -breite aus Format-String ───────────────────────────────────
 def _parse_rollen(fmt: str):
-    """'10 x 1.0 m Rolle' -> (laenge=10.0, breite=1.0)"""
+    """'10 x 1.0 m Rolle' → (laenge=10.0, breite=1.0)"""
     m = re.search(r"([\d.]+)\s*x\s*([\d.]+)", fmt or "")
     if not m:
         return None, None
@@ -90,25 +90,11 @@ def _bestell(rec: dict) -> dict:
     area = rec["area"]
     vfak = _verschnitt(pt)
 
-    # Absturzsicherung als Sonderposition über Laufmeter ────────────────
-    # Im Referenzmodell werden keine einzelnen Anschlagpunkte modelliert.
-    # Darum wird die Länge / der Umfang als nachvollziehbare Mengenbasis verwendet.
-    func = (rec.get("function", "") or "").lower()
-    pname = (rec.get("product_name", "") or "").lower()
-    if pt in STK_TYPES or "absturz" in func or "safsys" in pname:
-        length_m = rec.get("length_m")
-        if length_m is not None and length_m > 0:
-            length_m = round(float(length_m), 2)
-            return {"menge_display": length_m, "einheit": "lfm",
-                    "detail": f"{length_m:.2f} lfm",
-                    "menge_material": length_m,
-                    "menge_einbau": length_m,
-                    "mengenbasis": "Länge Begrenzungsrahmen"}
-
+    # Stück ──────────────────────────────────────────────────────────────
+    if pt in STK_TYPES:
         n = rec.get("stk_count", 1)
         return {"menge_display": n, "einheit": "Stk",
-                "detail": f"{n} Stk", "menge_material": n,
-                "menge_einbau": n, "mengenbasis": "Anzahl Elemente"}
+                "detail": f"{n} Stk", "menge_material": n}
 
     # Liter (Haftvermittler) ─────────────────────────────────────────────
     if pt in HAFTV_TYPES:
@@ -116,9 +102,7 @@ def _bestell(rec: dict) -> dict:
         liter = round(area * cons, 1)
         return {"menge_display": liter, "einheit": "L",
                 "detail": f"{liter:.1f} L  ({cons} L/m²)",
-                "menge_material": area,   # priced per m²
-                "menge_einbau": area,
-                "mengenbasis": "IFC-Fläche"}
+                "menge_material": area}   # priced per m²
 
     # m³ + Tonnen (Schüttgut) ────────────────────────────────────────────
     if pt in SCHUETT_TYPES:
@@ -132,9 +116,7 @@ def _bestell(rec: dict) -> dict:
         if vfak > 1:
             detail += f"  (+{int((vfak-1)*100)}% Verschnitt)"
         return {"menge_display": vol_best, "einheit": "m³",
-                "detail": detail, "menge_material": area * vfak,
-                "menge_einbau": area * vfak,
-                "mengenbasis": "IFC-Fläche"}
+                "detail": detail, "menge_material": area * vfak}
 
     # Laufmeter + Rollen ─────────────────────────────────────────────────
     if pt in ROLLEN_TYPES:
@@ -143,17 +125,13 @@ def _bestell(rec: dict) -> dict:
         if breite and breite > 0:
             lfm   = round(area_best / breite, 1)
             rollen = math.ceil(lfm / laenge) if laenge else "?"
-            detail = (f"{lfm:.1f} lfm  ->  {rollen} Rollen "
-                      f"({laenge}x{breite}m)  (+{int((vfak-1)*100)}% Verschnitt)")
+            detail = (f"{lfm:.1f} lfm  →  {rollen} Rollen "
+                      f"({laenge}×{breite}m)  (+{int((vfak-1)*100)}% Verschnitt)")
             return {"menge_display": lfm, "einheit": "lfm",
-                    "detail": detail, "menge_material": area_best,
-                    "menge_einbau": area_best,
-                    "mengenbasis": "IFC-Fläche"}
+                    "detail": detail, "menge_material": area_best}
         return {"menge_display": area_best, "einheit": "m²",
                 "detail": f"{area_best:.2f} m²  (+{int((vfak-1)*100)}%)",
-                "menge_material": area_best,
-                "menge_einbau": area_best,
-                "mengenbasis": "IFC-Fläche"}
+                "menge_material": area_best}
 
     # Platten (Dämmung, Gefälledämmung) ──────────────────────────────────
     if pt in PLATTEN_TYPES:
@@ -161,15 +139,11 @@ def _bestell(rec: dict) -> dict:
         detail = (f"{area_best:.2f} m²  "
                   f"(+{int((vfak-1)*100)}% Verschnitt)")
         return {"menge_display": area_best, "einheit": "m²",
-                "detail": detail, "menge_material": area_best,
-                "menge_einbau": area_best,
-                "mengenbasis": "IFC-Fläche"}
+                "detail": detail, "menge_material": area_best}
 
     # Standard m² ────────────────────────────────────────────────────────
     return {"menge_display": area, "einheit": "m²",
-            "detail": f"{area:.2f} m²", "menge_material": area,
-            "menge_einbau": area,
-            "mengenbasis": "IFC-Fläche"}
+            "detail": f"{area:.2f} m²", "menge_material": area}
 
 
 # ── Preisdatenbank laden ──────────────────────────────────────────────────────
@@ -177,7 +151,7 @@ def load_preisdatenbank(xlsx_bytes: bytes):
     logs = []
     wb = openpyxl.load_workbook(io.BytesIO(xlsx_bytes), data_only=True)
 
-    # Haupt-Lookup (Art.-Nr. -> Preis + Einbau)
+    # Haupt-Lookup (Art.-Nr. → Preis + Einbau)
     lk = next((s for s in wb.sheetnames if "lookup_kosten" in s.lower()),
                next((s for s in wb.sheetnames if "lookup" in s.lower()),
                     wb.sheetnames[0]))
@@ -194,9 +168,9 @@ def load_preisdatenbank(xlsx_bytes: bytes):
             "preis":  preis,
             "einbau": einbau,
         }
-    logs.append(f"OK Preisdatenbank: {len(art_db)} Artikel (Sheet '{lk}')")
+    logs.append(f"✅ Preisdatenbank: {len(art_db)} Artikel (Sheet '{lk}')")
 
-    # Drittprodukte-Lookup (CostLabel -> Preis + Einbau)
+    # Drittprodukte-Lookup (CostLabel → Preis + Einbau)
     dritt_db = {}
     dk = next((s for s in wb.sheetnames if "drittprodukt" in s.lower()), None)
     if dk:
@@ -212,9 +186,9 @@ def load_preisdatenbank(xlsx_bytes: bytes):
                 "preis":  preis,
                 "einbau": einbau,
             }
-        logs.append(f"OK Drittprodukte: {len(dritt_db)} Einträge (Sheet '{dk}')")
+        logs.append(f"✅ Drittprodukte: {len(dritt_db)} Einträge (Sheet '{dk}')")
     else:
-        logs.append("WARNUNG: Sheet 'Lookup_Drittprodukte' nicht gefunden – "
+        logs.append("⚠️  Sheet 'Lookup_Drittprodukte' nicht gefunden – "
                     "Drittprodukte werden mit CHF 0.00 ausgewiesen")
 
     return art_db, dritt_db, logs
@@ -235,165 +209,32 @@ def _collect_sw_props(el) -> dict:
     return props
 
 
-def _to_float(value):
-    """Wandelt IFC-/Stringwerte robust in float um."""
-    if value is None:
-        return None
-    if hasattr(value, "wrappedValue"):
-        value = value.wrappedValue
-    try:
-        return float(value)
-    except Exception:
-        pass
-    try:
-        s = str(value).strip()
-        s = (s.replace("m²", "").replace("m2", "")
-               .replace("m³", "").replace("m3", "")
-               .replace("lfm", "").replace("m", ""))
-        s = s.replace("'", "").replace(" ", "").replace(",", ".")
-        return float(s)
-    except Exception:
-        return None
-
-
 def _get_area(el):
-    """
-    Beste IfcQuantityArea aus allen IfcElementQuantity des Elements.
-
-    ArchiCAD exportiert viele Flächenwerte pro Bauteil, darunter Kanten-Flächen
-    ("Kanten-Oberflächenbereich (netto)"), die NICHT die Bauteil-Grundfläche
-    repräsentieren. Diese werden explizit ausgeschlossen.
-
-    Priorität (höchste zuerst):
-      1. "Oberflächenbereich oben (netto)"  (ArchiCAD Dach/Decke)
-      2. "NetArea" / "NetFloorArea"          (IFC-Standard)
-      3. "Oberflächenbereich oben"
-      4. "Oberflächenbereich" / "GrossArea"
-      5. Grösster verbleibender Nicht-Kanten-Wert
-    """
-    candidates = []
-    for rel in getattr(el, "IsDefinedBy", []) or []:
-        if not rel.is_a("IfcRelDefinesByProperties"):
-            continue
+    """Erste positive IfcQuantityArea aus allen IfcElementQuantity des Elements."""
+    best = None
+    for rel in el.IsDefinedBy:
+        if not rel.is_a("IfcRelDefinesByProperties"): continue
         pdef = rel.RelatingPropertyDefinition
-        if not pdef or not pdef.is_a("IfcElementQuantity"):
-            continue
+        if not pdef.is_a("IfcElementQuantity"): continue
         for q in pdef.Quantities:
             if q.is_a("IfcQuantityArea"):
-                v = _to_float(q.AreaValue)
-                if v is not None and v > 0.1:
-                    candidates.append((q.Name or "", v))
-
-    if not candidates:
-        return None
-
-    name_lo = [(n.strip().lower(), v) for n, v in candidates]
-
-    # Kanten-, Rand- und Öffnungs-Flächen ausschliessen
-    _KANTEN_WORDS = ("kanten", "kantenfl", "rand", "edge", "opening",
-                     "öffnung", "tür", "fenster", "löcher")
-    non_kanten = [(n, v) for n, v in name_lo
-                  if not any(kw in n for kw in _KANTEN_WORDS)]
-    pool = non_kanten if non_kanten else name_lo
-
-    # Prioritätsliste (exakt zuerst, dann Teilstring)
-    preferred = [
-        "oberflächenbereich oben (netto)",
-        "nettofläche",
-        "netfloorarea",
-        "netarea",
-        "net area",
-        "grossarea",
-        "grossfloorarea",
-        "oberflächenbereich oben",
-        "oberflächenbereich",
-        "fläche",
-    ]
-    # Exakter Treffer
-    for pref in preferred:
-        for n, v in pool:
-            if n == pref:
-                return v
-    # Teilstring-Treffer
-    for pref in preferred:
-        for n, v in pool:
-            if pref in n:
-                return v
-    # Letzter Fallback: grösster Wert
-    return max(v for _, v in pool)
-
-
-def _get_length(el):
-    """
-    Liest eine Länge für Sonderpositionen wie Absturzsicherung.
-
-    Priorität (höchste zuerst):
-      1. "Länge Begrenzungsrahmen" (Swisspor-spezifisch)
-      2. IFC-Standard "Length" / "Perimeter"
-      3. ArchiCAD Wand-Referenzlinien-Länge (für SAFSYS-Wandelemente)
-      4. "Grundriss-Umfang" / "Umfang" nur als letzter Fallback
-         (ArchiCAD: Umfang = 2 x Länge + 2 x Dicke – für einzelne Wandsegmente
-          daher ungeeignet als primäre Mengenbasis)
-    """
-    candidates = []
-    for rel in getattr(el, "IsDefinedBy", []) or []:
-        if not rel.is_a("IfcRelDefinesByProperties"):
-            continue
-        pdef = rel.RelatingPropertyDefinition
-        if not pdef or not pdef.is_a("IfcElementQuantity"):
-            continue
-        for q in pdef.Quantities:
-            if q.is_a("IfcQuantityLength"):
-                v = _to_float(q.LengthValue)
-                if v is not None and v > 0:
-                    candidates.append((q.Name or "", v))
-
-    if not candidates:
-        return None
-
-    preferred = [
-        # Swisspor-spezifisch
-        "länge begrenzungsrahmen",
-        "laenge begrenzungsrahmen",
-        # IFC-Standard
-        "perimeter",
-        "length",
-        # ArchiCAD Wand-Längenquantitäten (SAFSYS-Wandelemente)
-        "länge der referenzlinie",
-        "laenge der referenzlinie",
-        "wandlänge an der außenseite",
-        "wandlänge an der innenseite",
-        "durchschnittliche länge der wand",
-        "3d-länge",
-        # Allgemeine Teilsuche
-        "laenge",
-        "länge",
-        # Umfang als letzter Fallback
-        "umfang",
-    ]
-    for pref in preferred:
-        for name, val in candidates:
-            if str(name).strip().lower() == pref:
-                return val
-    for pref in preferred:
-        for name, val in candidates:
-            if pref in str(name).strip().lower():
-                return val
-
-    return candidates[0][1]
+                v = float(q.AreaValue)
+                if v > 0.1 and ("net" in (q.Name or "").lower() or best is None):
+                    best = v
+    return best
 
 
 # ── IFC einlesen: Einzelschicht-first, Gesamtaufbau-Fallback ─────────────────
 def extract_from_ifc(ifc_file_raw):
     logs       = []
-    direct_recs = {}   # (sid, func, art, product, thickness, format) -> rec
-    gesamt_recs = {}   # (sid, func, art, product, thickness, format) -> rec
+    direct_recs = {}   # (sid, func) → rec
+    gesamt_recs = {}   # (sid, func) → rec
 
     ifc = ifcopenshell.file.from_string(
         ifc_file_raw.getvalue().decode("utf-8", errors="replace")
     )
     elements = ifc.by_type("IfcElement")
-    logs.append(f"OK IFC geladen: {len(elements)} Elemente")
+    logs.append(f"✅ IFC geladen: {len(elements)} Elemente")
 
     for el in elements:
         # ── Identifikation ──────────────────────────────────────────────
@@ -416,7 +257,6 @@ def extract_from_ifc(ifc_file_raw):
         if not (sid and func): continue
 
         area = _get_area(el)
-        length_m = _get_length(el)
 
         # ════════════════════════════════════════════════════════════════
         # STRATEGIE 1 – Einzelschicht (func ≠ 00_Gesamtdachaufbau)
@@ -424,46 +264,34 @@ def extract_from_ifc(ifc_file_raw):
         if func != "00_Gesamtdachaufbau":
             if not area: continue
             props = _collect_sw_props(el)
-            art = props.get("ArticleNumber") or props.get("Artikelnummer") or ""
-            product_name = (props.get("ProductName") or props.get("Product") or "")
-            min_thickness = props.get("MinThickness") or ""
-            format_str = props.get("Format", "") or ""
-
-            # Nicht nur nach System + Funktion gruppieren.
-            # Im Modell kann dieselbe Funktion mehrfach vorkommen, z.B. zwei Wärmedämmungen
-            # im gleichen System mit unterschiedlichen Flächen oder Teilflächen.
-            key = (sid, func, art, product_name, min_thickness, format_str)
+            art   = props.get("ArticleNumber") or props.get("Artikelnummer")
+            key   = (sid, func)
 
             base = {
-                "article_nr":          art,
-                "product_name":        product_name,
+                "article_nr":          art or "",
+                "product_name":        (props.get("ProductName") or
+                                        props.get("Product") or ""),
                 "product_type":        props.get("ProductType", ""),
                 "cost_code":           props.get("CostCode", ""),
                 "cost_label":          props.get("CostLabel", ""),
                 "price_unit":          props.get("PriceUnit", "m²"),
                 "consumption_per_area":props.get("ConsumptionPerArea"),
-                "min_thickness_mm":    min_thickness,
+                "min_thickness_mm":    props.get("MinThickness"),
                 "density":             props.get("Density"),
-                "format_str":          format_str,
-                "length_m":            length_m,
+                "format_str":          props.get("Format", ""),
             }
             if key not in direct_recs:
-                direct_recs[key] = {**base, "areas": [round(area, 3)],
-                                    "lengths": [], "stk_count": 1}
-                if length_m and length_m > 0:
-                    direct_recs[key]["lengths"].append(round(float(length_m), 3))
+                direct_recs[key] = {**base, "areas": [round(area, 3)], "stk_count": 1}
             else:
                 direct_recs[key]["areas"].append(round(area, 3))
                 direct_recs[key]["stk_count"] += 1
-                if length_m and length_m > 0:
-                    direct_recs[key]["lengths"].append(round(float(length_m), 3))
 
         # ════════════════════════════════════════════════════════════════
         # STRATEGIE 2 – Gesamtaufbau (func == 00_Gesamtdachaufbau)
         # ════════════════════════════════════════════════════════════════
         else:
             if not area: continue
-            layer_data = {}   # pset_name -> props-dict
+            layer_data = {}   # pset_name → props-dict
 
             for rel in el.IsDefinedBy:
                 if not rel.is_a("IfcRelDefinesByProperties"): continue
@@ -480,37 +308,25 @@ def extract_from_ifc(ifc_file_raw):
 
             for pname, props in layer_data.items():
                 f_code = PSET_TO_FUNC[pname]
-                art = props.get("ArticleNumber", "") or ""
-                product_name = (props.get("Product") or props.get("ProductName") or "")
-                min_thickness = props.get("MinThickness") or ""
-                format_str = props.get("Format", "") or ""
-
-                # Gleiche Logik wie bei direkt modellierten Schichten:
-                # Gruppierung nach System, Funktion, Artikel, Produkt, Dicke und Format.
-                key = (sid, f_code, art, product_name, min_thickness, format_str)
-
-                base = {
+                key    = (sid, f_code)
+                art    = props.get("ArticleNumber", "")
+                base   = {
                     "article_nr":          art,
-                    "product_name":        product_name,
+                    "product_name":        (props.get("Product") or
+                                            props.get("ProductName") or ""),
                     "product_type":        props.get("ProductType", ""),
                     "cost_code":           props.get("CostCode", ""),
                     "cost_label":          props.get("CostLabel", ""),
                     "price_unit":          props.get("PriceUnit", "m²"),
                     "consumption_per_area":props.get("ConsumptionPerArea"),
-                    "min_thickness_mm":    min_thickness,
+                    "min_thickness_mm":    props.get("MinThickness"),
                     "density":             props.get("Density"),
-                    "format_str":          format_str,
-                    "length_m":            length_m,
+                    "format_str":          props.get("Format", ""),
                 }
                 if key not in gesamt_recs:
-                    gesamt_recs[key] = {**base, "areas": [round(area, 3)],
-                                        "lengths": [], "stk_count": 1}
-                    if length_m and length_m > 0:
-                        gesamt_recs[key]["lengths"].append(round(float(length_m), 3))
+                    gesamt_recs[key] = {**base, "areas": [round(area, 3)], "stk_count": 1}
                 else:
                     gesamt_recs[key]["areas"].append(round(area, 3))
-                    if length_m and length_m > 0:
-                        gesamt_recs[key]["lengths"].append(round(float(length_m), 3))
                     if props.get("ProductType", "") in STK_TYPES:
                         gesamt_recs[key]["stk_count"] += 1
 
@@ -518,41 +334,19 @@ def extract_from_ifc(ifc_file_raw):
     records = []
     n_direkt = n_gesamt = 0
 
-    direct_keys = set(direct_recs.keys())
-
-    for key, rec in direct_recs.items():
-        sid, func, art, product_name, min_thickness, format_str = key
-        total_area   = round(sum(rec["areas"]), 3)
-        lengths      = rec.get("lengths") or []
-        total_length = round(sum(lengths), 3) if lengths else None
-        records.append({
-            **rec,
-            "system_id":  sid,
-            "function":   func,
-            "area":       total_area,
-            "length_m":   total_length,
-            "mengenbasis": "Einzelschicht"
-        })
+    for (sid, func), rec in direct_recs.items():
+        total_area = round(sum(rec["areas"]), 3)
+        records.append({**rec, "system_id": sid, "function": func, "area": total_area})
         n_direkt += 1
 
-    for key, rec in gesamt_recs.items():
-        sid, func, art, product_name, min_thickness, format_str = key
-        if key in direct_keys:
-            continue   # exakt gleiche Einzelschicht hat Vorrang
-        total_area   = round(sum(rec["areas"]), 3)
-        lengths      = rec.get("lengths") or []
-        total_length = round(sum(lengths), 3) if lengths else None
-        records.append({
-            **rec,
-            "system_id":  sid,
-            "function":   func,
-            "area":       total_area,
-            "length_m":   total_length,
-            "mengenbasis": "Gesamtaufbau-Fallback"
-        })
+    for (sid, func), rec in gesamt_recs.items():
+        if (sid, func) in direct_recs:
+            continue   # Einzelschicht hat Vorrang
+        total_area = round(sum(rec["areas"]), 3)
+        records.append({**rec, "system_id": sid, "function": func, "area": total_area})
         n_gesamt += 1
 
-    logs.append(f"\nINFO: {len(records)} Positionen extrahiert "
+    logs.append(f"\n📊 {len(records)} Positionen extrahiert "
                 f"({n_direkt} Einzelschicht, {n_gesamt} Gesamtaufbau-Fallback)")
     return records, logs
 
@@ -572,36 +366,26 @@ def calculate_costs(records, art_db: dict, dritt_db: dict):
             cost_label = rec.get("cost_label", "")
             bm         = _bestell(rec)
 
-            # Preis-Lookup: Art.-Nr. -> Drittprodukt (CostLabel) -> 0.00
+            # Preis-Lookup: Art.-Nr. → Drittprodukt (CostLabel) → 0.00
             if art and art in art_db:
                 src    = art_db[art]
                 is_dritt = False
             elif cost_label and cost_label in dritt_db:
                 src    = dritt_db[cost_label]
                 is_dritt = True
-                logs.append(f"  INFO Drittprodukt: {cost_label}")
+                logs.append(f"  ℹ️  Drittprodukt: {cost_label}")
             else:
                 src    = {"bez": rec.get("product_name", "—"), "preis": 0.0, "einbau": 0.0}
                 is_dritt = True
-                logs.append(f"  WARNUNG KEIN PREIS: {rec['function']} | {cost_label or art or '?'}")
+                logs.append(f"  ⚠️  KEIN PREIS: {rec['function']} | {cost_label or art or '?'}")
 
             ep_mat  = src["preis"]
             ep_ein  = src.get("einbau", 0.0)
             menge_m = bm["menge_material"]
 
             pos_mat  = round(ep_mat  * menge_m, 2)
-            menge_ein = bm.get("menge_einbau", rec["area"])
-            pos_ein  = round(ep_ein  * menge_ein, 2)
+            pos_ein  = round(ep_ein  * rec["area"], 2)   # Einbau auf Nettofläche
             pos_tot  = round(pos_mat + pos_ein, 2)
-
-            # Flaeche vs. Laenge trennen: Absturzsicherung wird ueber lfm abgerechnet,
-            # nicht ueber m². flaeche_m2 = 0.0 verhindert falsche m²-Darstellung.
-            is_absturz = (
-                rec.get("product_type", "") in STK_TYPES
-                or "absturz" in (rec.get("function", "") or "").lower()
-                or "safsys" in (rec.get("product_name", "") or "").lower()
-            )
-            flaeche_out = 0.0 if is_absturz else rec["area"]
 
             kosten.append({
                 "system_id":        sid,
@@ -611,9 +395,7 @@ def calculate_costs(records, art_db: dict, dritt_db: dict):
                 "product_name":     rec.get("product_name", ""),
                 "article_nr":       art,
                 "bezeichnung":      src["bez"],
-                "flaeche_m2":       flaeche_out,
-                "laenge_m":         rec.get("length_m"),
-                "mengenbasis":      bm.get("mengenbasis") or rec.get("mengenbasis", "IFC-Fläche"),
+                "flaeche_m2":       rec["area"],
                 "bestell_detail":   bm["detail"],
                 "bestell_einheit":  bm["einheit"],
                 "menge_material":   menge_m,
@@ -624,7 +406,7 @@ def calculate_costs(records, art_db: dict, dritt_db: dict):
                 "poskosten_total":  pos_tot,
                 "is_drittprodukt":  is_dritt,
             })
-            status = "WARNUNG" if is_dritt else "OK"
+            status = "⚠️ " if is_dritt else "✅"
             logs.append(
                 f"  {status} {rec['function']:28} | {art or cost_label:12}"
                 f" | {bm['detail']:35}"
@@ -666,21 +448,21 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
     ws.title = "Kostenauswertung"
 
     # Titel
-    ws.merge_cells("A1:L1")
+    ws.merge_cells("A1:K1")
     c = ws["A1"]
-    c.value = "Swisspor – Kostenauswertung  |  Preisstand 2026  |  inkl. Verschnitt  |  exkl. MWST"
+    c.value = "Swisspor – Richtpreisauswertung  |  Preisstand 2026  |  inkl. Verschnitt  |  exkl. MWST  |  Einbaukosten: Richtwerte NPK 364 (CRB 2025) – nur für Demonstrationszwecke"
     _st(c, bold=True, bg=NAVY, fg=WHITE, align="center", size=11)
     ws.row_dimensions[1].height = 26
 
     # Header
-    headers = ["Sys", "BKP", "Schichtfunktion", "Produktname (IFC)",
+    headers = ["Sys", "Schichtfunktion", "Produktname (IFC)",
                "Art.-Nr.", "Fläche m²", "Bestellmenge",
-               "EP Mat.", "EP Ein.", "Mat. CHF", "Ein. CHF", "Total CHF"]
+               "EP Mat.", "EP Ein.", "Mat. CHF", "Ein. CHF", "Richtpreis CHF"]
     for i, h in enumerate(headers, 1):
         _st(ws.cell(2, i, h), bold=True, bg=NAVY, fg=WHITE, align="center", size=9)
     ws.row_dimensions[2].height = 20
 
-    col_w = [6, 11, 24, 26, 12, 10, 32, 10, 10, 14, 14, 16]
+    col_w = [6, 24, 26, 12, 10, 32, 10, 10, 14, 14, 16]
     for i, w in enumerate(col_w, 1):
         ws.column_dimensions[get_column_letter(i)].width = w
 
@@ -690,10 +472,10 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
     grand_mat = grand_ein = 0.0
 
     def _write_subtotal(row_n, sid, tot_mat, tot_ein):
-        ws.merge_cells(f"A{row_n}:K{row_n}")
+        ws.merge_cells(f"A{row_n}:J{row_n}")
         _st(ws.cell(row_n, 1, f"  Subtotal System {sid}"),
             bold=True, bg=NAVY, fg=WHITE, align="left", size=9)
-        _st(ws.cell(row_n, 12, tot_mat + tot_ein),
+        _st(ws.cell(row_n, 11, tot_mat + tot_ein),
             bold=True, bg=NAVY, fg=WHITE, align="right", size=9,
             fmt='#,##0.00 "CHF"')
         ws.row_dimensions[row_n].height = 18
@@ -706,7 +488,7 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
                                 sys_totals[cur_sys]["mat"],
                                 sys_totals[cur_sys]["ein"])
                 rn += 1
-                for col in range(1, 13):
+                for col in range(1, 12):
                     ws.cell(rn, col).fill = PatternFill("solid", fgColor=LIGHT)
                 ws.row_dimensions[rn].height = 4
                 rn += 1
@@ -719,21 +501,21 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
         grand_mat += rec["poskosten_mat"]
         grand_ein += rec["poskosten_ein"]
 
-        vals  = [sid, rec["cost_code"], rec["function"],
+        vals  = [sid, rec["function"],
                  rec["product_name"], rec["article_nr"],
                  rec["flaeche_m2"], rec["bestell_detail"],
                  rec["ep_material"], rec["ep_einbau"],
                  rec["poskosten_mat"], rec["poskosten_ein"], rec["poskosten_total"]]
-        aligns = ["center","center","left","left","center",
+        aligns = ["center","left","left","center",
                   "right","left","right","right","right","right","right"]
-        fmts   = [None, None, None, None, None,
+        fmts   = [None, None, None, None,
                   "#,##0.00", None,
                   "#,##0.00", "#,##0.00",
                   '#,##0.00', '#,##0.00', '#,##0.00 "CHF"']
 
         for i, (v, a, f) in enumerate(zip(vals, aligns, fmts), 1):
             cell_bg = bg
-            if i == 12 and isinstance(v, (int, float)) and v > 0 and not rec["is_drittprodukt"]:
+            if i == 11 and isinstance(v, (int, float)) and v > 0 and not rec["is_drittprodukt"]:
                 cell_bg = GREEN
             _st(ws.cell(rn, i, v), bg=cell_bg, align=a, fmt=f, size=9)
         ws.row_dimensions[rn].height = 15
@@ -750,17 +532,17 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
     rn += 1
     grand_tot = grand_mat + grand_ein
     for label, val, bg in [
-        ("TOTAL Material exkl. MWST", grand_mat, LIGHT),
-        ("TOTAL Einbau exkl. MWST",   grand_ein, LIGHT),
-        ("TOTAL exkl. MWST",          grand_tot, NAVY),
-        ("MWST 8.1 %",                round(grand_tot * mwst, 2), LIGHT),
-        ("TOTAL inkl. MWST",          round(grand_tot * (1 + mwst), 2), RED),
+        ("RICHTPREIS Material exkl. MWST", grand_mat, LIGHT),
+        ("RICHTPREIS Einbau exkl. MWST",   grand_ein, LIGHT),
+        ("RICHTPREIS TOTAL exkl. MWST",     grand_tot, NAVY),
+        ("MWST 8.1 %",                       round(grand_tot * mwst, 2), LIGHT),
+        ("RICHTPREIS TOTAL inkl. MWST",      round(grand_tot * (1 + mwst), 2), RED),
     ]:
-        ws.merge_cells(f"A{rn}:K{rn}")
+        ws.merge_cells(f"A{rn}:J{rn}")
         fg2 = WHITE if bg in (NAVY, RED) else "1A1A1A"
         _st(ws.cell(rn, 1, label),  bold=True, bg=bg, fg=fg2,
             align="right", size=11)
-        _st(ws.cell(rn, 12, val),   bold=True, bg=bg, fg=fg2,
+        _st(ws.cell(rn, 11, val),   bold=True, bg=bg, fg=fg2,
             align="right", size=11, fmt='#,##0.00 "CHF"')
         ws.row_dimensions[rn].height = 24
         rn += 1
@@ -768,34 +550,34 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
     ws.freeze_panes = "A3"
 
     # ════════════════════════════════════════════════════════════════════
-    # SHEET 2 – BKP-Zusammenzug
+    # SHEET 2 – Zusammenzug nach Schichtfunktion
     # ════════════════════════════════════════════════════════════════════
-    ws2 = wb.create_sheet("BKP-Zusammenzug")
+    ws2 = wb.create_sheet("Zusammenzug Schichtfunktion")
     ws2.merge_cells("A1:G1")
     c2 = ws2["A1"]
-    c2.value = "Swisspor – Kostenübersicht nach BKP-Code  |  alle Systeme summiert"
+    c2.value = "Swisspor – Richtpreisübersicht nach Schichtfunktion  |  Material + Einbau  |  alle Systeme summiert"
     _st(c2, bold=True, bg=NAVY, fg=WHITE, align="center", size=11)
     ws2.row_dimensions[1].height = 26
 
-    bkp_headers = ["BKP-Code", "Bezeichnung", "Fläche m²",
-                   "Material CHF", "Einbau CHF", "Total CHF", "Anteil %"]
-    for i, h in enumerate(bkp_headers, 1):
+    func_headers = ["Schichtfunktion", "Bezeichnung", "Fläche m²",
+                    "Material CHF", "Einbau CHF", "Total CHF", "Anteil %"]
+    for i, h in enumerate(func_headers, 1):
         _st(ws2.cell(2, i, h), bold=True, bg=NAVY, fg=WHITE, align="center", size=9)
     ws2.row_dimensions[2].height = 20
 
-    bkp_sums: dict = {}
+    func_sums: dict = {}
     for rec in kosten:
-        code = rec["cost_code"] or "—"
+        code = rec["function"] or "—"
         label = rec["cost_label"] or rec["function"]
-        if code not in bkp_sums:
-            bkp_sums[code] = {"label": label, "flaeche": 0.0, "mat": 0.0, "ein": 0.0}
-        bkp_sums[code]["flaeche"] += rec["flaeche_m2"] or 0.0
-        bkp_sums[code]["mat"]     += rec["poskosten_mat"]
-        bkp_sums[code]["ein"]     += rec["poskosten_ein"]
+        if code not in func_sums:
+            func_sums[code] = {"label": label, "flaeche": 0.0, "mat": 0.0, "ein": 0.0}
+        func_sums[code]["flaeche"] += rec["flaeche_m2"]
+        func_sums[code]["mat"]     += rec["poskosten_mat"]
+        func_sums[code]["ein"]     += rec["poskosten_ein"]
 
     r2 = 3
-    for code in sorted(bkp_sums):
-        s   = bkp_sums[code]
+    for code in sorted(func_sums):
+        s   = func_sums[code]
         tot = s["mat"] + s["ein"]
         pct = (tot / grand_tot * 100) if grand_tot > 0 else 0.0
         bg  = GREY if r2 % 2 == 0 else WHITE
@@ -811,10 +593,10 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
         ws2.row_dimensions[r2].height = 15
         r2 += 1
 
-    # BKP Total
+    # Total Schichtfunktion
     r2 += 1
     ws2.merge_cells(f"A{r2}:E{r2}")
-    _st(ws2.cell(r2, 1, "TOTAL exkl. MWST"),
+    _st(ws2.cell(r2, 1, "RICHTPREIS TOTAL exkl. MWST"),
         bold=True, bg=NAVY, fg=WHITE, align="right", size=11)
     _st(ws2.cell(r2, 6, grand_tot),
         bold=True, bg=NAVY, fg=WHITE, align="right", size=11,
@@ -833,7 +615,7 @@ def build_excel(kosten: list, mwst: float = 0.081) -> bytes:
 
 
 # ── Hauptfunktion ─────────────────────────────────────────────────────────────
-def process_kosten(ifc_file_raw, preisdb_file_raw):
+def process_kosten(ifc_file_raw, preisdb_file_raw, dritt_overrides: dict = None):
     logs = ["─── 1. Preisdatenbank ───"]
     art_db, dritt_db, db_l = load_preisdatenbank(preisdb_file_raw.getvalue())
     logs.extend(db_l)
@@ -841,6 +623,18 @@ def process_kosten(ifc_file_raw, preisdb_file_raw):
     logs.append("\n─── 2. IFC lesen ───")
     records, ifc_l = extract_from_ifc(ifc_file_raw)
     logs.extend(ifc_l)
+
+    # Überschreibe Drittprodukt-Preise aus App-Eingabe
+    if dritt_overrides:
+        for label, vals in dritt_overrides.items():
+            if label in dritt_db:
+                if "preis" in vals and vals["preis"] is not None:
+                    dritt_db[label]["preis"] = float(vals["preis"])
+                if "einbau" in vals and vals["einbau"] is not None:
+                    dritt_db[label]["einbau"] = float(vals["einbau"])
+            else:
+                dritt_db[label] = {"bez": label, "preis": float(vals.get("preis", 0.0)),
+                                   "einbau": float(vals.get("einbau", 0.0))}
 
     logs.append("\n─── 3. Kosten berechnen ───")
     kosten, k_l = calculate_costs(records, art_db, dritt_db)
@@ -855,21 +649,29 @@ def process_kosten(ifc_file_raw, preisdb_file_raw):
                     not r.get("cost_label") in dritt_db])
 
     if kosten:
-        logs.append(f"\nTotal exkl. MWST:  CHF {grand:,.2f}")
+        logs.append(f"\n💰 Total exkl. MWST:  CHF {grand:,.2f}")
         logs.append(f"   Total inkl. MWST:  CHF {grand * 1.081:,.2f}")
         logs.append(f"   davon Drittprodukte (CHF 0.00): {n_dritt} Positionen")
         excel_bytes = build_excel(kosten)
     else:
-        logs.append("\nWARNUNG: Keine Positionen – enriched IFC und Preisdatenbank prüfen.")
+        logs.append("\n⚠️  Keine Positionen – enriched IFC und Preisdatenbank prüfen.")
         excel_bytes = None
 
+    declaration = (
+        "⚠️  Hinweis: Einbaukosten basieren auf Richtwerten NPK 364 (CRB 2025). "
+        "Projektspezifische Zuschläge (Gerüst, Abdichtungsgrundriss, Anschlüsse) "
+        "sind nicht enthalten. Werte nur für Demonstrationszwecke."
+    )
+    logs.append(f"\n{declaration}")
+
     return {
-        "excel_bytes":  excel_bytes,
-        "grand_total":  grand,
-        "n_matched":    n_sw,
+        "excel_bytes":   excel_bytes,
+        "grand_total":   grand,
+        "n_matched":     n_sw,
         "n_drittprodukt": n_dritt,
-        "n_missing":    n_miss,
-        "n_systems":    n_sys,
-        "kosten_list":  kosten,   # für Charts
-        "log":          "\n".join(logs),
+        "n_missing":     n_miss,
+        "n_systems":     n_sys,
+        "kosten_list":   kosten,   # für Charts
+        "declaration":   declaration,
+        "log":           "\n".join(logs),
     }
