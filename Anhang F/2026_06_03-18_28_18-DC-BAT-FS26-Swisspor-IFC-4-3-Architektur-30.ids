@@ -1,0 +1,1701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ids:ids xmlns:ids="http://standards.buildingsmart.org/IDS" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd">
+  <!-- INFO: Von BIMQ erzeugter Export. Weitere Informationen finden Sie unter https://www.bimq.de -->
+  <ids:info>
+    <ids:title>DC_BAT_FS26_Swisspor</ids:title>
+    <ids:version/>
+    <ids:description>Integration von Bauprodukten in einen BIM-basierten LifeCycle Prozess</ids:description>
+    <ids:author>dario.vetsch@stud.hslu.ch</ids:author>
+    <ids:date>2026-06-03</ids:date>
+    <ids:purpose>Mindestanforderungen (30-00) | Mengen (30-01)</ids:purpose>
+    <ids:milestone>Projektierung (30)</ids:milestone>
+  </ids:info>
+  <ids:specifications>
+    <ids:specification name="OT001 Unterkonstruktion" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCSLAB</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT002 Haftvermittler" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT003 Dampfbremse" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00307 : Bezeichnung nach SIA || Produktbezeichnung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00308 : Anwendung nach SIA || Produktanwendung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT004 Dämmung" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT005 Unterbahn" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00307 : Bezeichnung nach SIA || Produktbezeichnung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00308 : Anwendung nach SIA || Produktanwendung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT006 Oberbahn" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00307 : Bezeichnung nach SIA || Produktbezeichnung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00308 : Anwendung nach SIA || Produktanwendung gemäss SIA-Klassifikation" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00401 : Material || Material" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Funktion</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Material</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00402 : sd-Wert || Diffusionsäquivalente Luftschichtdicke" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SdValue</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00403 : Flächenbezogene Masse || Masse pro Fläche der" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>MassPerArea</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00410 : Brandverhalten || Brandverhalten gemäss Norm" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ReactionToFire</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00411 : Brandverhaltensgruppe || Brandverhaltensgruppe gemäss VKF" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>FireClassificationCH</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00415 : Wärmestandfestigkeit || Widerstand des Produkts bei erhöhter Temperatur" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>HeatResistance</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00416 : Kaltbiegeverhalten || Verhalten des Produkts bei tiefer Temperatur" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>FlexibilityAtLowTemperature</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT007 Drainageschicht" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00401 : Material || Material" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Funktion</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Material</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00407 : Wasserspeichervermögen || Fähigkeit der Schicht, Wasser temporär zu speichern." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>WaterStorageCapacity</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00408 : Druckfestigkeit || Widerstand der Schicht gegen Druckbeanspruchung." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>CompressiveStrength</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00410 : Brandverhalten || Brandverhalten gemäss Norm" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ReactionToFire</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00411 : Brandverhaltensgruppe || Brandverhaltensgruppe gemäss VKF" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>FireClassificationCH</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT008 Schutzschicht" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00401 : Material || Material" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Funktion</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Material</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00410 : Brandverhalten || Brandverhalten gemäss Norm" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ReactionToFire</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00411 : Brandverhaltensgruppe || Brandverhaltensgruppe gemäss VKF" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Technisch</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>FireClassificationCH</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT009 Absturzsicherung" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00102 : System-ID || Zuordnung zum swisspor-Systemaufbau" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SystemID</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00103 : Schichtfunktion || Funktion des Elements im Systemaufbau." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Identifikation</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Function</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00301 : Produktbezeichnung || Bezeichnung des eingesetzten Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductName</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00302 : Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00303 : Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00304 : Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00305 : Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00306 : Leistungserklärung Nr. || Nummer der zugehörigen Leistungserklärung / Declaration of Performance" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Produkt</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+    <ids:specification name="OT010 Gesamtdachbauteil" ifcVersion="IFC4X3_ADD2">
+      <ids:applicability minOccurs="0" maxOccurs="unbounded">
+        <ids:entity>
+          <ids:name>
+            <ids:simpleValue>IFCROOF</ids:simpleValue>
+          </ids:name>
+        </ids:entity>
+      </ids:applicability>
+      <ids:requirements>
+        <ids:property instructions="OD00602_03_01 : Haftvermittler_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_03_02 : Haftvermittler_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_03_03 : Haftvermittler_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_03_04 : Haftvermittler_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_03_05 : Haftvermittler_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_03_06 : Haftvermittler_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_05_01 : Haftvermittler_Kostencode" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>CostCode</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_05_02 : Haftvermittler_Kostenbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>CostLabel</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_05_03 : Haftvermittler_Preisbasis" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>PriceUnit</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_05_04 : Haftvermittler_Einheitspreis" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>UnitPrice</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00602_05_05 : Haftvermittler_Preisstand" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Haftvermittler</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>PriceDate</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_01 : Dampfbremse_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_02 : Dampfbremse_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_03 : Dampfbremse_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_04 : Dampfbremse_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_05 : Dampfbremse_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_06 : Dampfbremse_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_07 : Dampfbremse_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00603_03_08 : Dampfbremse_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dampfbremse</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_01 : Dämmung_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_02 : Dämmung_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_03 : Dämmung_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_04 : Dämmung_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_05 : Dämmung_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_06 : Dämmung_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_07 : Dämmung_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00604_03_08 : Dämmung_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Dämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_01 : Gefälledämmung_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_02 : Gefälledämmung_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_03 : Gefälledämmung_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_04 : Gefälledämmung_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_05 : Gefälledämmung_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_06 : Gefälledämmung_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_07 : Gefälledämmung_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00605_03_08 : Gefälledämmung_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Gefälledämmung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_01 : Unterbahn_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_02 : Unterbahn_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_03 : Unterbahn_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_04 : Unterbahn_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_05 : Unterbahn_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_06 : Unterbahn_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_07 : Unterbahn_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00606_03_08 : Unterbahn_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Unterbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_01 : Oberbahn_Produktbezeichnung || Bezeichnung des eingesetzten Produkts der Oberbahn." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_02 : Oberbahn_Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_03 : Oberbahn_Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_04 : Oberbahn_Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_05 : Oberbahn_Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_06 : Oberbahn_Leistungserklärung_Nr || Nummer der zugehörigen Leistungserklärung / Declaration of Performance." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_07 : Oberbahn_Bezeichnung_nach_SIA || Produktbezeichnung gemäss SIA-Klassifikation." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00607_03_08 : Oberbahn_Anwendung_nach_SIA || Produktanwendung gemäss SIA-Klassifikation." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Oberbahn</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_01 : Trennschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_02 : Trennschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_03 : Trennschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_04 : Trennschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_05 : Trennschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_06 : Trennschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_07 : Trennschicht_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00608_03_08 : Trennschicht_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Trennschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_01 : Drainageschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_02 : Drainageschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_03 : Drainageschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_04 : Drainageschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_05 : Drainageschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00609_03_06 : Drainageschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Drainageschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_01 : Filterschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_02 : Filterschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_03 : Filterschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_04 : Filterschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_05 : Filterschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_06 : Filterschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_07 : Filterschicht_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00610_03_08 : Filterschicht_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Filterschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_01 : Wasserspeicherschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_02 : Wasserspeicherschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_03 : Wasserspeicherschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_04 : Wasserspeicherschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_05 : Wasserspeicherschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_06 : Wasserspeicherschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_07 : Wasserspeicherschicht_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00611_03_08 : Wasserspeicherschicht_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Wasserspeicherschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_01 : Schutzschicht_Produktbezeichnung || Bezeichnung des eingesetzten Produkts der Schutzschicht." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_02 : Schutzschicht_Produkttyp || Typ des Produkts innerhalb des Schichtaufbaus." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_03 : Schutzschicht_Hersteller || Hersteller des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_04 : Schutzschicht_Artikelnummer || Eindeutige Artikel- oder Produktnummer." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_05 : Schutzschicht_Lieferformat || Format oder Abmessung des Produkts." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00612_03_06 : Schutzschicht_Leistungserklärung_Nr || Nummer der zugehörigen Leistungserklärung / Declaration of Performance." dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Schutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_01 : Brandschutzschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_02 : Brandschutzschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_03 : Brandschutzschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_04 : Brandschutzschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_05 : Brandschutzschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_06 : Brandschutzschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_07 : Brandschutzschicht_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00614_03_08 : Brandschutzschicht_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Brandschutzschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_01 : Vegetationstragschicht_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_02 : Vegetationstragschicht_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_03 : Vegetationstragschicht_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_04 : Vegetationstragschicht_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_05 : Vegetationstragschicht_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_06 : Vegetationstragschicht_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_07 : Vegetationstragschicht_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00615_03_08 : Vegetationstragschicht_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Vegetationstragschicht</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_01 : Belag_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_02 : Belag_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_03 : Belag_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_04 : Belag_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_05 : Belag_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_06 : Belag_Leistungserklärung_Nr" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>DeclarationOfPerformanceNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_07 : Belag_Bezeichnung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIADesignation</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00616_03_08 : Belag_Anwendung_nach_SIA" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Belag</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>SIAApplication</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00617_03_01 : Absturzsicherung_Produktbezeichnung" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Absturzsicherung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Product</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00617_03_02 : Absturzsicherung_Produkttyp" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Absturzsicherung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ProductType</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00617_03_03 : Absturzsicherung_Hersteller" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Absturzsicherung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Manufacturer</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00617_03_04 : Absturzsicherung_Artikelnummer" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Absturzsicherung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>ArticleNumber</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+        <ids:property instructions="OD00617_03_05 : Absturzsicherung_Lieferformat" dataType="IFCIDENTIFIER">
+          <ids:propertySet>
+            <ids:simpleValue>Pset_Swisspor_Absturzsicherung</ids:simpleValue>
+          </ids:propertySet>
+          <ids:baseName>
+            <ids:simpleValue>Format</ids:simpleValue>
+          </ids:baseName>
+        </ids:property>
+      </ids:requirements>
+    </ids:specification>
+  </ids:specifications>
+</ids:ids>
